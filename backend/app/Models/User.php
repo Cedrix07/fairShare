@@ -42,16 +42,24 @@ class User extends Authenticatable
 
     public function createdGroups()
     {
-        return $this->hasMany(Group::class, 'created_by');
+        return $this->hasMany(
+            Group::class,
+            'created_by'
+        );
     }
 
     public function groups()
     {
-        return $this->belongsToMany(Group::class)->withTimestamps();
+        return $this->belongsToMany(
+            Group::class
+        )->withTimestamps();
     }
 
     public function bills()
     {
-        return $this->hasMany(Bill::class, 'created_by');
+        return $this->hasMany(
+            Bill::class,
+            'created_by'
+        );
     }
 }
