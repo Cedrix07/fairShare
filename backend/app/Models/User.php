@@ -23,11 +23,43 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'google_id',
+        'avatar',
+        'qr_payment_path',
+    ];
+
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function createdGroups()
+    {
+        return $this->hasMany(
+            Group::class,
+            'created_by'
+        );
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(
+            Group::class
+        )->withTimestamps();
+    }
+
+    public function bills()
+    {
+        return $this->hasMany(
+            Bill::class,
+            'created_by'
+        );
     }
 }
