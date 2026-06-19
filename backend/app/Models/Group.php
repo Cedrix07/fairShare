@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    
+    protected $fillable = [
+        'name',
+        'invite_code',
+        'created_by'
+    ];
+    protected $hidden = [
+        'pivot', // Always hides the pivot object from JSON output
+    ];
     public function creator()
     {
         return $this->belongsTo(
@@ -15,7 +22,7 @@ class Group extends Model
         );
     }
 
-    public function users()
+    public function members()
     {
         return $this->belongsToMany(
             User::class
