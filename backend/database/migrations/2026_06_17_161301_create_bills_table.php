@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('group_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
-            $table->string('description')->nullable();
+            $table->foreignId('group_id')
+                ->constrained()
+                ->cascadeOnDelete();
+            $table->foreignId('created_by')
+                ->constrained('users')
+                ->cascadeOnDelete();
+            $table->string('description');
             $table->decimal('total_amount', 10, 2);
             $table->integer('member_count');
             $table->decimal('amount_per_member', 10, 2);
