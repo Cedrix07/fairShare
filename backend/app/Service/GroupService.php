@@ -22,7 +22,7 @@ class GroupService
             'invite_code' => $this->generateInviteCode(),
             'created_by' => $user->id
         ]);
-        $group->users()->attach($user->id);
+        $group->members()->attach($user->id);
         return $group;
     }
 
@@ -34,11 +34,11 @@ class GroupService
             throw new \Exception('Invalid invite code.');
         }
 
-        if ($group->users()->where('user_id', $user->id)->exists()) {
+        if ($group->members()->where('user_id', $user->id)->exists()) {
             throw new \Exception('User is already a member of this group.');
         }
 
-        $group->users()->attach($user->id);
+        $group->members()->attach($user->id);
 
         return $group;
     }
@@ -66,12 +66,12 @@ class GroupService
         return $group;
     }
 
-    public function delete(Group $group, User $user)
-    {
-        if ($group->created_by !== $user->id) {
-            throw new \Exception('Only the creator can delete the group.');
-        }
+        public function delete(Group $group, User $user)
+        {
+            if ($group->created_by !== $user->id) {
+                throw new \Exception('Only the group creator can delete this group.');
+            }
 
-        $group->delete();
-    }
+            $group->delete();
+        }
 }

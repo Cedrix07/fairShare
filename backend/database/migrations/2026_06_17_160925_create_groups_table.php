@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('invite_code')->unique();
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->string('invite_code', 6)->unique();
+            $table->foreignId('created_by')
+                ->constrained('users')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
