@@ -62,4 +62,12 @@ class User extends Authenticatable
             'created_by'
         );
     }
+
+    public function messages()
+    {
+        return $this->hasMany(
+            Message::class,
+            'user_id'
+        );
+    }
 }

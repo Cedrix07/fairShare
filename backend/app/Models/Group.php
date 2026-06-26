@@ -35,4 +35,11 @@ class Group extends Model
             Bill::class
         );
     }
+
+    public function messages()
+    {
+        return $this->hasMany(
+            Message::class
+        );
+    }
 }

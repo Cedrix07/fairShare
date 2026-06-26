@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BillController;
 use App\Http\Controllers\Api\GroupController;
+use App\Http\Controllers\Api\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/groups/{group}/bills', [BillController::class, 'index']);
     Route::get('/bills/{bill}', [BillController::class, 'show']);
     Route::delete('/bills/{bill}', [BillController::class, 'destroy']);
+
+    // Message with file upload
+    Route::post('/groups/{group}/messages', [MessageController::class, 'store']);
+    Route::get('/groups/{group}/messages', [MessageController::class, 'index']);
+    Route::delete('/messages/{message}', [MessageController::class, 'destroy']);
 });
